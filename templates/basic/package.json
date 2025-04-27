@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "nuxt dev",
+    "prepare": "nuxt prepare"
+  },
+  "devDependencies": {
+    "nuxt": "latest",
+    "typescript": "latest",
+    "vue": "latest",
+    "tailwindcss":"latest",
+    "@tailwindcss/vite":"latest",
+    "@iconify/vue":"latest"
+  }
+}
