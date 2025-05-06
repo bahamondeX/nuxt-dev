@@ -1,0 +1,10 @@
+diff --git a/index.js b/index.js
+index 12a4a94..bc98343 100644
+--- a/index.js
++++ b/index.js
+@@ -1,6 +1,5 @@
+-export default function isWsl() {
++module.exports = function isWsl() {
+ 	if (process.platform !== 'linux') {
+ 	return false;
+ 	}

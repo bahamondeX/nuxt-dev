@@ -2,7 +2,6 @@
 import { Pane, Splitpanes } from "splitpanes";
 import { filesToVirtualFsTree } from "~/templates/utils";
 import { VirtualFile } from "~/structures/VirtualFile";
-import { OpenAI } from "openai";
 
 const play = usePlaygroundStore();
 const guide = useGuideStore();
@@ -21,6 +20,10 @@ const input = ref<string>("");
 const showRootContextMenu = ref(false);
 const rootContextMenuX = ref(0);
 const rootContextMenuY = ref(0);
+
+const props = defineProps<{ chunk: string }>();
+
+const rxChunk = ref<string>(props.chunk);
 
 watch(
   () => play.fileSelected,
@@ -191,6 +194,14 @@ const handleKeyDown = async (e: KeyboardEvent) => {
     e.preventDefault();
   }
 };
+
+watch(
+  () => rxChunk.value,
+  (newChunk: string) => {
+    input.value += newChunk;
+  }
+);
+
 </script>
 
 <template>

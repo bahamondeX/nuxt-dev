@@ -1,6 +1,9 @@
 import { execaSync } from "execa";
 
 export default defineNuxtConfig({
+  build: {
+    analyze: false
+  },
   modules: [
     "@vueuse/nuxt",
     "@unocss/nuxt",
@@ -12,7 +15,6 @@ export default defineNuxtConfig({
     "floating-vue/nuxt",
     "@nuxt/eslint",
     "@nuxtjs/i18n",
-    // local
     "~/modules/template-loader",
     "~/modules/nuxt-link",
   ],
@@ -148,17 +150,5 @@ export default defineNuxtConfig({
     experimental: {
       autoImportTranslationFunctions: true,
     },
-  },
-
-  ogImage: {
-    defaults: {
-      component: "OgImageDocs",
-      props: {
-        colorMode: "dark",
-      },
-    },
-    componentOptions: {
-      global: true,
-    },
-  },
+  }
 });

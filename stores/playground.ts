@@ -38,7 +38,7 @@ export const usePlaygroundStore = defineStore("playground", () => {
     async function init() {
       const [wc, filesRaw] = await Promise.all([
         import("@webcontainer/api").then(({ WebContainer }) =>
-          WebContainer.boot(),
+          WebContainer.boot({ forwardPreviewErrors: false }),
         ),
 
         import("../templates").then((r) =>

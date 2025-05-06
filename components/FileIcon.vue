@@ -26,9 +26,9 @@ const FILE_ICONS = [
     match: /\.[mc]?jsx?$/,
     icon: "i-catppuccin-javascript",
   },
-   {
+  {
     match: /\.[mc]?css?$/,
-    icon: "i-catppuccin-css"
+    icon: "i-catppuccin-css",
   },
 ];
 

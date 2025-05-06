@@ -11,6 +11,7 @@ export const useUiState = defineStore("ui", () => {
       panelPreview: 40,
       panelFileTree: 20,
       showTerminal: true,
+      showEditor: true,
     };
   }
 

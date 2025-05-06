@@ -9,8 +9,8 @@
     "nuxt": "latest",
     "typescript": "latest",
     "vue": "latest",
-    "tailwindcss":"latest",
-    "@tailwindcss/vite":"latest",
-    "@iconify/vue":"latest"
+    "tailwindcss": "latest",
+    "@tailwindcss/vite": "latest",
+    "@iconify/vue": "latest"
   }
 }

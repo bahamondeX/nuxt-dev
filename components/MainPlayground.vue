@@ -11,6 +11,7 @@ const ui = useUiState();
 function startDragging() {
   ui.isPanelDragging = true;
 }
+
 function endDraggingHorizontal(e: { size: number }[]) {
   ui.isPanelDragging = false;
   ui.panelEditor = e[0].size;
@@ -26,7 +27,7 @@ function endDraggingHorizontal(e: { size: number }[]) {
         vertical
         relative
         max-h-full
-        of-hidden
+        of-auto
         w-full
         @resize="startDragging"
         @resized="endDraggingHorizontal"
@@ -43,6 +44,9 @@ function endDraggingHorizontal(e: { size: number }[]) {
     <PaneSplitter />
     <Pane v-if="ui.showTerminal">
       <PanelTerminal />
+    </Pane>
+    <Pane v-else>
+      <ChatContainer />
     </Pane>
   </Splitpanes>
 </template>
