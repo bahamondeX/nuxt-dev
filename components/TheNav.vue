@@ -161,16 +161,6 @@ addCommands(
       >
         <div i-ph-terminal-window-duotone text-2xl />
       </button>
-      <button
-        rounded
-        p2
-        :title="$t('editor.toggle')"
-        hover="bg-active"
-        :class="ui.showEditor ? '' : 'op50'"
-        @click="ui.showEditor = !ui.showEditor"
-      >
-        <div i-ph-terminal-window-duotone text-2xl />
-      </button>
       <ColorSchemeToggle />
       <NuxtLink
         rounded

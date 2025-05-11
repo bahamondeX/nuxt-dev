@@ -21,10 +21,6 @@ const showRootContextMenu = ref(false);
 const rootContextMenuX = ref(0);
 const rootContextMenuY = ref(0);
 
-const props = defineProps<{ chunk: string }>();
-
-const rxChunk = ref<string>(props.chunk);
-
 watch(
   () => play.fileSelected,
   (newFile) => {
@@ -194,13 +190,6 @@ const handleKeyDown = async (e: KeyboardEvent) => {
     e.preventDefault();
   }
 };
-
-watch(
-  () => rxChunk.value,
-  (newChunk: string) => {
-    input.value += newChunk;
-  }
-);
 
 </script>
 

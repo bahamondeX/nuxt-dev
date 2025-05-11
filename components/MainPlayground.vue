@@ -8,20 +8,18 @@ import { Pane, Splitpanes } from "splitpanes";
 
 const ui = useUiState();
 
-function startDragging() {
-  ui.isPanelDragging = true;
+const chunk = ref("")
+
+
+async function handleSend(data: string) {
+  chunk.value += data;
 }
 
-function endDraggingHorizontal(e: { size: number }[]) {
-  ui.isPanelDragging = false;
-  ui.panelEditor = e[0].size;
-  ui.panelPreview = e[1].size;
-}
 </script>
 
 <template>
-  <Splitpanes h-full horizontal of-hidden>
-    <PaneSplitter />
+  <Splitpanes h-full max-w-0.5 horizontal of-hidden>
+    <PanelSplitter />
     <Pane>
       <Splitpanes
         vertical
@@ -29,25 +27,23 @@ function endDraggingHorizontal(e: { size: number }[]) {
         max-h-full
         of-auto
         w-full
-        @resize="startDragging"
-        @resized="endDraggingHorizontal"
       >
         <Pane>
           <PanelEditor />
         </Pane>
-        <PaneSplitter />
+        <PanelSplitter />
         <Pane>
           <PanelPreview />
         </Pane>
       </Splitpanes>
     </Pane>
-    <PaneSplitter />
+    <PanelSplitter />
     <Pane v-if="ui.showTerminal">
       <PanelTerminal />
     </Pane>
-    <Pane v-else>
-      <ChatContainer />
-    </Pane>
+    <Pane v-else of-auto> 
+      <ChatBot @send="handleSend" />
+    </Pane> 
   </Splitpanes>
 </template>
 
