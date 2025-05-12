@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@unocss/nuxt",
     "@nuxtjs/seo",
-    "@nuxt/content",
     "@nuxt/image",
     "@nuxtjs/color-mode",
     "@pinia/nuxt",

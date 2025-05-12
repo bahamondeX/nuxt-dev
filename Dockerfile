@@ -1,13 +1,14 @@
-FROM node:20-alpine AS build-stage
+FROM node:20-alpine
 
 WORKDIR /app
-RUN corepack enable
 
+RUN apk add --no-cache git \
+    && corepack enable
 
 COPY . .
-RUN pnpm build
 
-COPY --from=build-stage /app/.output ./.output
+RUN pnpm install
+RUN pnpm build
 
 EXPOSE 3000
 

@@ -30,7 +30,7 @@
         "birpc": "*",
         "floating-vue": "*",
         "fuse.js": "*",
-        "groq": "^3.88.2",
+        "groq-sdk": "^0.21.0",
         "html2canvas": "^1.4.1",
         "jspdf": "^3.0.1",
         "jszip": "*",
@@ -1632,7 +1632,7 @@
 
     "graphemer": ["graphemer@1.4.0", "", {}, "sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag=="],
 
-    "groq": ["groq@3.88.2", "", {}, "sha512-dyc3eD5LUR13EDvzJTBiKgwZzAwW7pWpe+xx3BUCgJSm34m6RamLwEJNKS/E9vXZLaxVnXI1Ax1Bqktqa7c8eQ=="],
+    "groq-sdk": ["groq-sdk@0.21.0", "", { "dependencies": { "@types/node": "^18.11.18", "@types/node-fetch": "^2.6.4", "abort-controller": "^3.0.0", "agentkeepalive": "^4.2.1", "form-data-encoder": "1.7.2", "formdata-node": "^4.3.2", "node-fetch": "^2.6.7" } }, "sha512-SZg7oH/DsFvJllmdujNGZbfKUr2ATaU6urq0ZcnyObnmj6+nYM7WCGkyI2JMK+aWDzNiW6MwBNlSH722sHvtEQ=="],
 
     "gzip-size": ["gzip-size@7.0.0", "", { "dependencies": { "duplexer": "^0.1.2" } }, "sha512-O1Ld7Dr+nqPnmGpdhzLmMTQ4vAsD+rHwMm1NLUmoUFFymBOMKxCCrtDxqdBRYXdeEPEi3SyoR4TizJLQrnKBNA=="],
 
