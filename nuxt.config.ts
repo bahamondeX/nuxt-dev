@@ -35,28 +35,11 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: "",
   },
-
-  content: {
-    build: {
-      markdown: {
-        rehypePlugins: {
-          "rehype-external-links": {},
-        },
-        highlight: {
-          theme: {
-            default: "vitesse-light",
-            dark: "vitesse-dark",
-          },
-        },
-      },
-    },
-  },
-
   runtimeConfig: {
     public: {
       buildTime: Date.now(),
       gitSha: execaSync("git", ["rev-parse", "HEAD"]).stdout.trim(),
-      repoUrl: "https://github.com/nuxt/learn.nuxt.com",
+      repoUrl: "https://github.com/obahamondex/nuxt-dev.com",
     },
     app: {
       devtools: {
