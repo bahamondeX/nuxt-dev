@@ -1,0 +1,35 @@
+guide: Guía
+edit-this-page: Editar esta página
+terminal:
+  name: Terminal
+  restart: Reiniciar terminal
+  hide: Ocultar terminal
+  toggle: Alternar terminal
+download-zip: Descargar playground como ZIP
+work-in-progress: En progreso
+search: Buscar
+color-mode:
+  to-dark: Cambiar a modo oscuro
+  to-light: Cambiar a modo claro
+coming-soon: Próximamente
+reset-challenge: Reiniciar desafío
+show-solution: Mostrar solución
+search-dots: Buscar...
+steps:
+  initializing-webcontainer: Inicializando WebContainer
+  mounting-files: Montando archivos
+  installing-dependencies: Instalando dependencias
+  starting-nuxt-server: Iniciando servidor Nuxt
+  waiting-for-nuxt-to-ready: Esperando que Nuxt esté listo
+restart-server: Reiniciar servidor
+interactive-terminal-mode: Modo de terminal interactivo
+files: Archivos
+preview: Vista previa
+built: Compilado
+vueVersion: Versión de Vue
+nuxtVersion: Versión de Nuxt
+editor:
+  toggle: Alternar Editor/Vista previa
+  show: Mostrar editor
+  hide: Ocultar editor
+code: Código

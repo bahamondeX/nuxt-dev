@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@pinia/nuxt",
     "floating-vue/nuxt",
-    "@nuxt/eslint",
     "@nuxtjs/i18n",
     "~/modules/template-loader",
     "~/modules/nuxt-link",
@@ -99,14 +98,6 @@ export default defineNuxtConfig({
       include: ["../content/**/.template/**/*.ts"],
     },
   },
-  eslint: {
-    config: {
-      standalone: false,
-      nuxt: {
-        sortConfigKeys: true,
-      },
-    },
-  },
 
   i18n: {
     locales: [
@@ -120,6 +111,12 @@ export default defineNuxtConfig({
         code: "ja",
         file: "ja.yaml",
       },
+      {
+        name: "Español",
+        code: "es",
+        file: "es.yaml"
+
+      }
     ],
     lazy: true,
     strategy: "prefix",

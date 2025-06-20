@@ -27,12 +27,8 @@ addCommands(
   {
     id: "download-zip",
     title: () => $t("download-zip"),
-    visible: () => {
-      return play.status === "ready" && guide.features.download !== false;
-    },
-    handler: () => {
-      downloadCurrentGuide();
-    },
+    visible: () => play.status === "ready" && guide.features.download !== false,
+    handler: downloadCurrentGuide,
     icon: "i-ph-download-duotone",
   },
   {
@@ -46,24 +42,23 @@ addCommands(
   {
     id: "language-en",
     title: "Change to English",
-    handler: () => {
-      i18n.setLocale("en");
-    },
+    handler: () => i18n.setLocale("en"),
     icon: "i-ph-globe-duotone",
-    visible: () => {
-      return i18n.locale.value !== "en";
-    },
+    visible: () => i18n.locale.value !== "en",
+  },
+  {
+    id: "language-es",
+    title: "Cambiar a Español",
+    handler: () => i18n.setLocale("es"),
+    icon: "i-ph-globe-duotone",
+    visible: () => i18n.locale.value !== "es",
   },
   {
     id: "language-ja",
     title: "日本語に切り替える",
-    handler: () => {
-      i18n.setLocale("ja");
-    },
+    handler: () => i18n.setLocale("ja"),
     icon: "i-ph-globe-duotone",
-    visible: () => {
-      return i18n.locale.value !== "ja";
-    },
+    visible: () => i18n.locale.value !== "ja",
   },
 );
 </script>
@@ -102,6 +97,15 @@ addCommands(
           </div>
         </template>
       </VDropdown>
+      <button
+        rounded
+        p2
+        hover="bg-active"
+        :title="$t('editor.toggle')"
+        @click="ui.toggleEditorPreview()"
+      >
+        <div i-ph-code-duotone text-2xl />
+      </button>
       <button
         rounded
         p2

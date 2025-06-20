@@ -28,3 +28,8 @@ preview: プレビュー
 built: ビルド
 vueVersion: Vueバージョン
 nuxtVersion: Nuxtバージョン
+editor:
+  toggle: エディターとプレビューを切り替える
+  show: エディターを表示
+  hide: エディターを非表示
+code: コード

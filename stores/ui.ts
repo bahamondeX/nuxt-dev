@@ -24,8 +24,8 @@ export const useUiState = defineStore("ui", () => {
     { default: () => getLayoutDefaults(), watch: true },
   );
 
-  // update and sync cookie with the reactive state
   Object.assign(persistState, getLayoutDefaults(), { ...stateCookie.value });
+
   watch(persistState, () => {
     stateCookie.value = { ...persistState };
   });
@@ -34,10 +34,15 @@ export const useUiState = defineStore("ui", () => {
     persistState.showTerminal = !persistState.showTerminal;
   }
 
+  function toggleEditorPreview() {
+    persistState.showEditor = !persistState.showEditor;
+  }
+
   return {
     isPanelDragging,
     isContentDropdownShown,
     toggleTerminal,
+    toggleEditorPreview, // ⬅️ nuevo
     resetLayout,
     ...toRefs(persistState),
   };

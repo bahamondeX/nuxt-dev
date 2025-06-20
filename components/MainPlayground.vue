@@ -1,49 +1,38 @@
-x<!--
-Please create an issue first before submiting PRs.
-So that we can discuss about the directions and plans, to avoid wasted efforts. Thank you!
--->
-
 <script setup lang="ts">
 import { Pane, Splitpanes } from "splitpanes";
 
 const ui = useUiState();
-
-const chunk = ref("")
-
+const chunk = ref("");
 
 async function handleSend(data: string) {
   chunk.value += data;
 }
-
 </script>
 
 <template>
-  <Splitpanes h-full max-w-0.5 horizontal of-hidden>
-    <PanelSplitter />
-    <Pane>
-      <Splitpanes
-        vertical
-        relative
-        max-h-full
-        of-auto
-        w-full
-      >
+  <!-- Layout principal: vertical (arriba Chat+Editor/Preview, abajo Terminal) -->
+  <Splitpanes horizontal h-full w-full of-hidden>
+    
+    <!-- Parte superior: Chat + Editor/Preview -->
+    <Pane class="min-w-1/3">
+      <Splitpanes vertical of-hidden>
+        <!-- ChatBot a la izquierda (1/3 del ancho) -->
         <Pane>
-          <PanelEditor />
+          <ChatBot @send="handleSend" />
         </Pane>
-        <PanelSplitter />
-        <Pane>
-          <PanelPreview />
+
+        <!-- Editor o Preview a la derecha (2/3 del ancho) -->
+        <Pane class="min-w-2/3">
+          <PanelEditor v-if="ui.showEditor" />
+          <PanelPreview v-else />
         </Pane>
       </Splitpanes>
     </Pane>
-    <PanelSplitter />
+
+    <!-- Terminal en la parte inferior, ocupa todo el ancho -->
     <Pane v-if="ui.showTerminal">
       <PanelTerminal />
     </Pane>
-    <Pane v-else of-auto> 
-      <ChatBot @send="handleSend" />
-    </Pane> 
   </Splitpanes>
 </template>
 
@@ -51,11 +40,9 @@ async function handleSend(data: string) {
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
 }
-
 .slide-fade-leave-active {
   transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
 }
-
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   transform: translateX(-30vw);

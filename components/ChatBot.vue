@@ -11,7 +11,7 @@ const handleSend = async (content:string)=>{
 </script>
 <template>
 <div>
-<UiInputContent @send="handleSend" dark:invert />
+<UiInputContent @send="handleSend" />
 <UiMessageList :messages="messages" />
 </div>
 </template>
