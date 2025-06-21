@@ -195,7 +195,7 @@ const handleKeyDown = async (e: KeyboardEvent) => {
 
 <template>
   <Splitpanes of-hidden>
-    <Pane flex="~ col" h-full of-auto class="max-w-1/3">
+    <Pane flex="~ col" h-full of-auto>
       <div h-full grid="~ rows-[min-content_1fr]">
         <div
           flex="~ gap-2 items-center"

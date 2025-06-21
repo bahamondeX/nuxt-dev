@@ -5,6 +5,8 @@ import { type FunctionParameters } from 'groq-sdk/resources/shared'
 import { VirtualFile } from '~/structures/VirtualFile'
 import { usePlaygroundStore } from '@/stores/playground'
 
+const MODEL_ID = 'gemini-2.0-flash'
+
 type CodeArgument = {
 	type: 'component' | 'composable' | 'style' | 'edit'
 	filePath: string
@@ -16,17 +18,14 @@ export function useChat() {
 	const isLoading = ref(false)
 	const play = usePlaygroundStore()
 
-	const sendMessage = async (content: string, callback?:(chunk:string)=>void) => {
+	const sendMessage = async (content: string, callback?: (chunk: string) => void) => {
 		isLoading.value = true
 		messages.value.push({ role: 'user', content })
 
-		const response = await client.chat.completions.create({
-			model: 'meta-llama/llama-4-maverick-17b-128e-instruct',
+		const chatStream = await client.chat.completions.create({
+			model: MODEL_ID,
 			messages: [
-				{
-					role: 'system',
-					content
-				},
+				{ role: 'system', content },
 				...messages.value
 			],
 			stream: true,
@@ -41,17 +40,17 @@ export function useChat() {
 							properties: {
 								filePath: {
 									type: 'string',
-									description: 'Ruta del archivo, por ejemplo: components/Foo.vue si es component, composables/foo.ts si es composable, styles/foo.css si es style y la ruta del archivo existente si es edit.'
+									description: 'Path of the file to generate or modify.'
 								},
 								type: {
 									type: 'string',
-									enum: ['component', 'composable', 'style', 'edit'],
-									description: 'Tipo de contenido a generar'
+									enum: ['component', 'composable', 'styles', 'edit'],
+									description: 'Type of code to generate.'
 								},
 								context: {
 									type: 'string',
 									nullable: true,
-									description: 'Contenido original si el tipo es "edit"'
+									description: 'Original code content if editing.'
 								}
 							},
 							required: ['filePath', 'type']
@@ -66,7 +65,7 @@ export function useChat() {
 		let isToolCall = false
 		let toolCallData: any = null
 
-		for await (const chunk of response) {
+		for await (const chunk of chatStream) {
 			const delta = chunk.choices?.[0]?.delta
 
 			if (delta?.tool_calls) {
@@ -77,8 +76,9 @@ export function useChat() {
 
 			if (delta?.content) {
 				fullContent += delta.content
-				if (messages.value[messages.value.length - 1]?.role === 'assistant') {
-					messages.value[messages.value.length - 1].content += delta.content
+				const lastMsg = messages.value[messages.value.length - 1]
+				if (lastMsg?.role === 'assistant') {
+					lastMsg.content += delta.content
 				} else {
 					messages.value.push({ role: 'assistant', content: delta.content })
 				}
@@ -101,13 +101,12 @@ export function useChat() {
 				content: `Create or update: \`${filePath}\``
 			})
 
-			const toolResponse = await client.chat.completions.create({
-				model: 'meta-llama/llama-4-maverick-17b-128e-instruct',
+			const toolStream = await client.chat.completions.create({
+				model: MODEL_ID,
 				messages: generationContext,
 				stream: true
 			})
 
-			// Crear carpeta si no existe
 			const dir = filePath.split('/').slice(0, -1).join('/')
 			const hasDir = Array.from(play.files.keys()).some(key => key.startsWith(`${dir}/`))
 			if (!hasDir && dir) {
@@ -115,16 +114,15 @@ export function useChat() {
 				play.files.set(dummy.filepath, dummy)
 			}
 
-			// Crear archivo y escribir progresivamente
 			const file = new VirtualFile(filePath, '', play.webcontainer!)
 			play.files.set(file.filepath, file)
 
 			let output = ''
-			for await (const chunk of toolResponse) {
+			for await (const chunk of toolStream) {
 				const content = chunk.choices?.[0]?.delta?.content
 				if (!content) continue
 				output += content
-				callback ? callback(content) : null
+				callback?.(content)
 				file.write(output)
 			}
 		}

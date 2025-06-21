@@ -14,7 +14,7 @@ async function handleSend(data: string) {
   <Splitpanes horizontal h-full w-full of-hidden>
     
     <!-- Parte superior: Chat + Editor/Preview -->
-    <Pane class="min-w-1/3">
+    <Pane>
       <Splitpanes vertical of-hidden>
         <!-- ChatBot a la izquierda (1/3 del ancho) -->
         <Pane>
@@ -22,10 +22,12 @@ async function handleSend(data: string) {
         </Pane>
 
         <!-- Editor o Preview a la derecha (2/3 del ancho) -->
-        <Pane class="min-w-2/3">
-          <PanelEditor v-if="ui.showEditor" />
-          <PanelPreview v-else />
+        <Pane  v-show="ui.showEditor" :class="ui.showEditor ? 'w-full':'hidden w-0'" >
+          <PanelEditor />
         </Pane>
+        <Pane  v-show="!ui.showEditor" :class="ui.showEditor ? 'hidden  w-0':'w-full'">
+         <PanelPreview  />
+      </Pane>
       </Splitpanes>
     </Pane>
 
